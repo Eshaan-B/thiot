@@ -1,0 +1,41 @@
+/mavros/altitude
+
+
+
+/mavros/global_position/raw/gps_vel
+/mavros/local_position/velocity_body
+
+
+
+/mavros/local_position/pose
+/mavros/local_position/velocity_local
+
+
+recording rosbag
+rosbag record /mavros/global_position/local
+
+Save as text file
+rostopic echo -p -b 2021-04-10-16-51-47.bag /mavros/global_position/local > xy.txt
+
+
+topics try
+/mavros/altitude
+
+/mavros/global_position/local
+/mavros/global_position/raw/gps_vel
+
+/mavros/local_position/pose
+/mavros/local_position/velocity_local
+
+
+recording 2 rosbags
+rosbag record /mavros/local_position/pose /mavros/local_position/velocity_local
+
+Save as text file
+rostopic echo -p -b 2022-02-08-12-39-20.bag /mavros/local_position/pose > drone_test_50meter_apart_pose.txt
+rostopic echo -p -b 2022-02-08-12-39-20.bag /mavros/local_position/velocity_local > drone_test_50meter_apart_vel.txt
+
+rosservice call /param/set "param_id: 'NAME OF PARAMETER'
+value:
+  integer: 0
+  real: 0.4"
